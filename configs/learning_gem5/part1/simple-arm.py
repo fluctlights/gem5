@@ -29,6 +29,7 @@ This is the ARM equivalent to `simple.py` (which is designed to run using the
 X86 ISA). More detailed documentation can be found in `simple.py`.
 """
 
+import os
 import m5
 from m5.objects import *
 
@@ -39,7 +40,7 @@ system.clk_domain.clock = "1GHz"
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = "timing"
-system.mem_ranges = [AddrRange("512MB")]
+system.mem_ranges = [AddrRange("8192MB")]
 system.cpu = ArmTimingSimpleCPU()
 
 system.membus = SystemXBar()
@@ -60,7 +61,8 @@ thispath = os.path.dirname(os.path.realpath(__file__))
 binary = os.path.join(
     thispath,
     "../../../",
-    "tests/test-progs/hello/bin/arm/linux/hello",
+    "cpu_tests/benchmarks/bin/arm/Bubblesort",
+    #"tests/test-progs/hello/bin/arm/linux/hello"
 )
 
 system.workload = SEWorkload.init_compatible(binary)
